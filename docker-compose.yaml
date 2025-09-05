@@ -1,0 +1,15 @@
+services:
+  pg-test:
+    container_name: postgres-test
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    networks:
+      - test-net
+    environment:
+      - 'POSTGRES_PASSWORD=test'
+      - 'POSTGRES_USER=test'
+      - 'POSTGRES_DB=test'
+
+networks:
+    test-net:
