@@ -30,6 +30,7 @@ run-uuid7auto-insert
 ```
 
 ## Results
+The test was executed on a Mac Pro M1 Max.
 
 ```
 shell:>run-int-insert
