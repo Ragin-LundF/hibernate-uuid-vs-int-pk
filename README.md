@@ -82,3 +82,19 @@ SELECT i.relname "Table Name",indexrelname "Index Name",
 FROM pg_stat_all_indexes i JOIN pg_class c ON i.relid=c.oid
 WHERE i.relname in('int_table', 'uuid7_auto_table', 'uuid7_table', 'uuid_table');
 ```
+
+## Additional Infos
+
+You can configure the size of the datasets in the `application.yaml` file:
+
+```yaml
+dbinsert:
+  data:
+    size: 100
+  log:
+    batch:
+      enabled: true
+```
+
+- `dbinsert.data.size` - defines the size of the dataset to insert
+- `dbinsert.log.batch.enabled` - if true, the application will log the inserts to see if batch was used

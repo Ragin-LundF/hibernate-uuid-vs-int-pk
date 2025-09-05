@@ -27,3 +27,10 @@ spring:
   shell:
     interactive:
       enabled: true
+
+dbinsert:
+  data:
+    size: 1_000_000
+  log:
+    batch:
+      enabled: falserun

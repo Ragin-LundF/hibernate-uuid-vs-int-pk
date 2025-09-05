@@ -8,6 +8,7 @@ import io.finapi.dbinsert.repositories.IntRepository
 import io.finapi.dbinsert.repositories.Uuid7AutoRepository
 import io.finapi.dbinsert.repositories.Uuid7Repository
 import io.finapi.dbinsert.repositories.UuidRepository
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.shell.standard.ShellComponent
 import org.springframework.shell.standard.ShellMethod
 import kotlin.system.measureTimeMillis
@@ -19,6 +20,7 @@ class InsertShellComponent(
     private val uuidRepository: UuidRepository,
     private val uuid7Repository: Uuid7Repository,
     private val uuid7AutoRepository: Uuid7AutoRepository,
+    @param:Value($$"${dbinsert.data.size}") private val dataSize: Int,
 ) {
     @ShellMethod(value = "execute insert of int data")
     fun runIntInsert() {
@@ -90,7 +92,7 @@ class InsertShellComponent(
 
     private fun createIntDummyData(): List<IntDbModel> {
         val result = mutableListOf<IntDbModel>()
-        repeat(NUMBER_ENTRIES) { i ->
+        repeat(dataSize) { i ->
             result.add(
                 IntDbModel(
                     name = "Name $i"
@@ -102,7 +104,7 @@ class InsertShellComponent(
 
     private fun createUuidDummyData(): List<UuidDbModel> {
         val result = mutableListOf<UuidDbModel>()
-        repeat(NUMBER_ENTRIES) { i ->
+        repeat(dataSize) { i ->
             result.add(
                 UuidDbModel(
                     name = "Name $i"
@@ -114,7 +116,7 @@ class InsertShellComponent(
 
     private fun createUuid7DummyData(): List<Uuid7DbModel> {
         val result = mutableListOf<Uuid7DbModel>()
-        repeat(NUMBER_ENTRIES) { i ->
+        repeat(dataSize) { i ->
             result.add(
                 Uuid7DbModel(
                     name = "Name $i"
@@ -126,7 +128,7 @@ class InsertShellComponent(
 
     private fun createUuid7AutoDummyData(): List<Uuid7AutoDbModel> {
         val result = mutableListOf<Uuid7AutoDbModel>()
-        repeat(NUMBER_ENTRIES) { i ->
+        repeat(dataSize) { i ->
             result.add(
                 Uuid7AutoDbModel(
                     name = "Name $i"
@@ -134,9 +136,5 @@ class InsertShellComponent(
             )
         }
         return result
-    }
-
-    companion object {
-        private const val NUMBER_ENTRIES = 1_000_000
     }
 }

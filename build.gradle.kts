@@ -25,6 +25,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.shell:spring-shell-starter")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
+    implementation("net.ttddyy:datasource-proxy:1.11.0")
 
     implementation("com.github.f4b6a3:uuid-creator:6.1.1")
 
