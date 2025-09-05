@@ -1,4 +1,4 @@
-package io.finapi.dbinsert
+package io.finapi.dbinsert.repositories
 
 import io.finapi.dbinsert.models.IntDbModel
 import org.springframework.data.repository.CrudRepository

@@ -1,4 +1,4 @@
-package io.finapi.dbinsert
+package io.finapi.dbinsert.repositories
 
 import io.finapi.dbinsert.models.Uuid7DbModel
 import org.springframework.data.repository.CrudRepository

@@ -1,8 +1,13 @@
 package io.finapi.dbinsert
 
 import io.finapi.dbinsert.models.IntDbModel
+import io.finapi.dbinsert.models.Uuid7AutoDbModel
 import io.finapi.dbinsert.models.Uuid7DbModel
 import io.finapi.dbinsert.models.UuidDbModel
+import io.finapi.dbinsert.repositories.IntRepository
+import io.finapi.dbinsert.repositories.Uuid7AutoRepository
+import io.finapi.dbinsert.repositories.Uuid7Repository
+import io.finapi.dbinsert.repositories.UuidRepository
 import org.springframework.shell.standard.ShellComponent
 import org.springframework.shell.standard.ShellMethod
 import kotlin.system.measureTimeMillis
@@ -13,6 +18,7 @@ class InsertShellComponent(
     private val intRepository: IntRepository,
     private val uuidRepository: UuidRepository,
     private val uuid7Repository: Uuid7Repository,
+    private val uuid7AutoRepository: Uuid7AutoRepository,
 ) {
     @ShellMethod(value = "execute insert of int data")
     fun runIntInsert() {
@@ -65,6 +71,23 @@ class InsertShellComponent(
         println("Total time UUID7 Insert: $totalTime ms")
     }
 
+    @ShellMethod(value = "execute insert of uuid7 auto generated data")
+    fun runUuid7AutoInsert() {
+        val totalTime = measureTimeMillis {
+            val creationTimed = measureTimedValue {
+                createUuid7AutoDummyData()
+            }
+            println("Created ${creationTimed.value.size} UUID7 Auto entries in ${creationTimed.duration} ms")
+
+            val data = creationTimed.value
+            val time = measureTimeMillis {
+                uuid7AutoRepository.saveAll(data)
+            }
+            println("Inserted ${data.size} entries with UUID7 Auto in $time ms")
+        }
+        println("Total time UUID7 Auto Insert: $totalTime ms")
+    }
+
     private fun createIntDummyData(): List<IntDbModel> {
         val result = mutableListOf<IntDbModel>()
         repeat(NUMBER_ENTRIES) { i ->
@@ -94,6 +117,18 @@ class InsertShellComponent(
         repeat(NUMBER_ENTRIES) { i ->
             result.add(
                 Uuid7DbModel(
+                    name = "Name $i"
+                )
+            )
+        }
+        return result
+    }
+
+    private fun createUuid7AutoDummyData(): List<Uuid7AutoDbModel> {
+        val result = mutableListOf<Uuid7AutoDbModel>()
+        repeat(NUMBER_ENTRIES) { i ->
+            result.add(
+                Uuid7AutoDbModel(
                     name = "Name $i"
                 )
             )
