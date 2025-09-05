@@ -16,7 +16,7 @@ Test with BIGINT:
 run-int-insert
 ```
 
-Test with UUIDv4 (default Hibernate implementation for UUID ID generator):
+Test with UUIDv4 (default Hibernate implementation for `@UuidGenerator`, which uses random UUIDs):
 
 ```shell
 run-uuid-insert
@@ -28,7 +28,7 @@ Test with UUIDv7 (just create a UUID7 at object creation time):
 run-uuid7insert
 ```
 
-Test with UUIDv7 (with sequence creator annotation):
+Test with UUIDv7 (with UUIDv7 auto generation with own annotation for sequence):
 
 ```shell
 run-uuid7auto-insert

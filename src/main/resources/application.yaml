@@ -33,4 +33,4 @@ dbinsert:
     size: 1_000_000
   log:
     batch:
-      enabled: falserun
+      enabled: false

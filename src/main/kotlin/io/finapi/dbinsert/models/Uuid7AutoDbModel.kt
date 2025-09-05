@@ -11,6 +11,16 @@ import java.util.UUID
 @Table(name = "UUID7_AUTO_TABLE")
 data class Uuid7AutoDbModel (
     @Id
+    /*
+    In hibernate 6, the time value is not UUIDv7.
+    See also hint in the generator:
+
+        Note:
+        Can be a bottleneck, since synchronization is used when incrementing an
+
+     So we use our own generator annotation
+     */
+    // @UuidGenerator(style = UuidGenerator.Style.TIME)
     @Uuid7IdGenerated
     var id: UUID? = null,
 
